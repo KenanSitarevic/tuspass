@@ -38,6 +38,7 @@ body, html {
   height: 100%;
   font-family: Spartan;
   color: #575757;
+  background-color: #796F65;
 }
 .bg {
   background-image: url("/src/images/backgroundbest.jpg");
@@ -48,10 +49,80 @@ body, html {
 }
 
 .landing-bg {
-  background-image: url("/src/images/bg.jpg");
+  background-image: url("/src/images/background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  
+}
+
+.login-bg {
+  background-image: url("/src/images/loginbg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-form-bg {
+  background-color: #BC8777;
+}
+
+.full-screen {
+  height: 100vh;
+  width: 100vw;
+}
+
+.height-full {
+  height: 80vh;
+}
+
+.profile-form {
+  h4 {
+    font-size: 4rem;
+  }
+    h6 {
+    font-size: 2rem;
+  }
+}
+
+.big-text {
+  font-size: 14em;
+  color: #2f5d5b;
+}
+
+.input-font-size {
+  font-size: 2rem;
+}
+
+.login-header-size {
+  font-size: 6rem;
+}
+
+.login-subtitle-size {
+  font-weight: 400;
+  margin-bottom: 20%;
+}
+
+.big-inputs {
+  input {
+    font-size: 1.4rem;
+  }
+}
+
+.color-picker {
+  width: 100px;
+  height: 80px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
 .font-51 {
@@ -117,6 +188,19 @@ a {
   display:-moz-inline-box;
   display:inline-block;
   text-decoration: none;
+}
+
+.profile-img-size {
+  width: 300px;
+  height: 300px;
+}
+
+.profile-pic-setting {
+  background-size: cover;
+}
+
+.profile-background-color{
+  background-color: #dddddd;
 }
 
 @media screen and (max-width: 768px) {

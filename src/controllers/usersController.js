@@ -6,7 +6,7 @@ const usersService = require(paths.servicePaths.users)
 
 async function postUser (req, res) {
   console.log(" Unisao u controller ");
-  console.log(req.file);
+  console.log(req.body);
   
   try {
     // const { Username, FirstName, LastName, Password, Email, Url } = req.body
@@ -30,6 +30,7 @@ async function postUser (req, res) {
       req.body.youtube_profile,
       req.body.github_profile,
       req.body.tiktok_profile,
+      req.body.color,
     )
     res.status(201).send(user)
   } catch (error) {
@@ -39,7 +40,9 @@ async function postUser (req, res) {
 }
 
 async function postImg (req, res) {
-  res.send('Uploaded successfully')
+  console.log(req.body);
+  res.status(201).send('Uploaded successfully')
+
   // const tempPath = req.file.path;
   // const targetPath = path.join(__dirname, "./uploads/image.png");
 
@@ -84,6 +87,7 @@ async function updateUser (req, res){
       req.body.youtube_profile,
       req.body.github_profile,
       req.body.tiktok_profile,
+      req.body.color,
     )
     res.status(201).send(user)
   } catch (error) {

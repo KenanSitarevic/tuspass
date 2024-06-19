@@ -1,17 +1,19 @@
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const paths = require('../utils/paths.js')
+const fsp = require('fs').promises;
 
 const users = require(paths.modelsPaths.users)
+const imgDirectory = './images/'
 
 class UsersService {
-  async AddUser(username, first_name, last_name, passwordNotHashed, email, url, phone, occupation, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile) {
+  async AddUser(username, first_name, last_name, passwordNotHashed, email, url, phone, occupation, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile, color) {
     
     try {
       const saltRounds = 10
       const salt = bcryptjs.genSaltSync(saltRounds)
       const password = bcryptjs.hashSync(passwordNotHashed, salt)
-      const User = await users.create({ username, first_name, last_name, password, email, url, phone, occupation, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile })
+      const User = await users.create({ username, first_name, last_name, password, email, url, phone, occupation, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile, color })
       
       if (User !== null) { return User } else { return false }
     } catch (error) {
@@ -19,9 +21,9 @@ class UsersService {
     }
   }
 
-  async updateUser(username, first_name, last_name, email, occupation, url, phone, id, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile){
+  async updateUser(username, first_name, last_name, email, occupation, url, phone, id, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile, color){
     try {
-      const User = await users.update({username, first_name, last_name, email, occupation, url, phone, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile}, {
+      const User = await users.update({username, first_name, last_name, email, occupation, url, phone, company, city, address, zip_code, facebook_profile, instagram_profile, linkedin_profile, twitter_profile, youtube_profile, github_profile, tiktok_profile, color}, {
         where: {id}
       });
       return User;
@@ -76,6 +78,7 @@ class UsersService {
         youtube_profile: User.youtube_profile,
         github_profile: User.github_profile,
         tiktok_profile: User.tiktok_profile,
+        color: User.color,
         token
       }
     } catch (error) {
@@ -85,11 +88,10 @@ class UsersService {
 
   async getUserInfo(id) {
     try {
+      const img = await fsp.readFile(imgDirectory + id + '.jpg',  {encoding: 'base64'});
       const User = await users.findByPk(id)
-      if (User !== null) {
-       
-        return User }
-        else { return false }
+      User.dataValues.img = img
+      return User ? User : false
     } catch (error) {
       throw error
     }

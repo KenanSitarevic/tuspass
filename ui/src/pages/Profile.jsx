@@ -21,10 +21,11 @@ const Profile = () => {
       method: 'get',
       url: import.meta.env.VITE_API_URL + location,
     }).then(res => {
-      if (res.data.url !== ''){ 
-        return window.location.replace(res.data.url);
+      if (res.data.url !== null){ 
+        window.location.replace(res.data.url);
       }
       setUser(res.data)
+      console.log(res.data)
       setLoader(false)
     });
   };
@@ -34,24 +35,31 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="container shadow mt-5">
+    <div className="container shadow mt-5 profile-background-color height-full d-flex flex-column justify-content-around">
       {loader ? 
       <div className="row justify-content-center align-items-center">
       <Loader/> 
       </div> :
       <>
       <div className="row justify-content-center align-items-center">
-        <CircleInitials />
+        <CircleInitials img={user.img} />
       </div>
-      <div className="row text-center">
+
+      <SocialsList user={user} />
+      <div className="row text-center profile-form">
         <h4 className="mb-3">{user?.first_name + ' ' + user?.last_name}</h4>
       </div>
-      <div className="row text-center mb-4">
+      <div className="row text-center mb-4 profile-form">
         <h6 className="mb-3">{user.occupation}</h6>
-        <h6 className="mb-3">Telefon: {user.phone}</h6>
+        <h6 className="mb-3">Phone: {user.phone}</h6>
         <h6 className="mb-3">Email: {user.email}</h6>
+        <h6 className="mb-3">Company: {user.company}</h6>
+        <h6 className="mb-3">City: {user.city}</h6>
+        <h6 className="mb-3">Adress: {user.address}</h6>
+        <h6 className="mb-3">Zip code: {user.zip_code}</h6>
+        
       </div>
-      <SocialsList className="col-6"/>
+      
       </>
       }
     </div>

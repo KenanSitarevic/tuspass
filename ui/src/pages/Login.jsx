@@ -6,6 +6,9 @@ import Loader from "../components/loader/Loader";
 import '../index.css';
 import { APP_ROUTES } from '../utils/constants';
 
+import { Link } from "react-router-dom";
+
+
 // const { authenticated } = Authenticated();
 
 
@@ -63,27 +66,38 @@ const Login = () => {
   }
 
   return (
-    <div className="container col-4 mt-5">
-    <div className="row justify-content-center align-items-center">
-      <div className="row text-center">
+    <div className="full-screen d-flex justify-content-center col-4 mx-auto">
+    <div className='d-flex w-100'>
+    <div className="row justify-content-center align-items-center w-50 bg-white">
+      <div className="row text-center w-50">
         { loader ? 
         <div className="row justify-content-center align-items-center">
         <Loader/> 
         </div> :
+        <>
+        <h1 className='login-header-size'>Login</h1>
+        <h3 className='font-weight-light login-subtitle-size'>Please enter your credentials</h3>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
-            <input type='email' className='form-control' id='email' placeholder='Email' value={email.value} onChange={handleChangeEmail}></input>
+            <input type='email' className='form-control input-font-size' id='email' placeholder='Email' value={email.value} onChange={handleChangeEmail}></input>
           </div>
           <div className='form-group'>
-            <input type='password' className='form-control mt-3' id='password' placeholder='Password' value={password.value} onChange={handleChangePassword}></input>
+            <input type='password' className='form-control input-font-size mt-3' id='password' placeholder='Password' value={password.value} onChange={handleChangePassword}></input>
           </div>
-          <div className='form-group'>
-            <input type='submit' value="Login" />
+          <div className='form-group mt-5'>
+            <input className='btn btn-outline-dark input-font-size' type='submit' value="Login" />
           </div>
         </form>
+        </>
         }
       </div>
     </div>
+    <div className='login-bg d-flex justify-content-center align-items-center w-50'>
+        <h1 className='mx-5 big-text'>WELCOME BACK!</h1>
+
+    </div>
+    </div>
+
   </div>
 
   )

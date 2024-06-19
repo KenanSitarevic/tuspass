@@ -89,6 +89,10 @@ User.init({
     type: DataTypes.STRING(100),
     allowNull: true
   },
+  color: {
+    type: DataTypes.STRING(10),
+    allowNull: true
+  },
 
   
 }, {

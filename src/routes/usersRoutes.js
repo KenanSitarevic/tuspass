@@ -1,18 +1,24 @@
 const express = require('express')
 const router = express.Router()
 const paths = require('../utils/paths.js')
-
 const path = require('path')
-
-
 const multer = require("multer");
-const upload = multer({ dest: 'images' });
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    return cb(null, "./images")
+  },
+  filename: function(req, file, cb) {
+    return cb(null, `${file.originalname}`)
+  } 
+})
+const upload = multer({storage});
 
 const auth = require(paths.utilsPaths.authentication)
 const usersController = require(paths.controllerPaths.users)
 
-router.post('/register', upload.single("file"), usersController.postUser)
-// router.post('/register/upload', upload.single("file") ,usersController.postImg)
+router.post('/register', usersController.postUser)
+router.post('/upload', upload.single("file") ,usersController.postImg)
 router.put('/edit', usersController.updateUser)
 router.put('/edit/password', usersController.changeUserPassword)
 router.post('/login', usersController.loginUser)
