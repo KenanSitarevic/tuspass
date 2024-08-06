@@ -91,7 +91,7 @@ const ProfileForm = () => {
     })
   };
 
-  const updateUser = (email, username, firstName, lastName, occupation, phone, url, company, city, address, zipCode, facebookProfile, instagramProfile, linkedinProfile, twitterProfile, youtubeProfile, githubProfile, file, color) => {
+  const updateUser = (email, username, firstName, lastName, occupation, phone, url, company, city, address, zipCode, facebookProfile, instagramProfile, linkedinProfile, twitterProfile, youtubeProfile, githubProfile, tiktokProfile, file, color) => {
     axios.put(import.meta.env.VITE_API_URL + 'edit',{
       username: username,
       first_name: firstName,
@@ -430,7 +430,12 @@ const ProfileForm = () => {
               </div>
               
               <div className='form-group mt-5 d-flex justify-content-end'>
-                <button type='button' className='btn btn-primary input-font-size' onClick={handleSubmit}>Pošalji zahtjev za karticu</button>
+                { isEdit &&
+                  <button type='button' className='btn btn-primary input-font-size' onClick={handleSubmit}>Spasi izmjene</button>
+                }
+                { !isEdit &&
+                  <button type='button' className='btn btn-primary input-font-size' onClick={handleSubmit}>Pošalji zahtjev za karticu</button>
+                }
               </div>
             </form>
         </div>
